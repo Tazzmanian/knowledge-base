@@ -7,13 +7,13 @@
     <bpmn:laneSet id="LaneSet_04ldbo1">
       <bpmn:lane id="Lane_03z7n2u" name="Order receive">
         <bpmn:flowNodeRef>Event_0fssf8n</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_06vb28h</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1lzzoqg</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_06vb28h</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1y5w9zc" name="Order Dispatch">
         <bpmn:flowNodeRef>Event_043i7uv</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_057wy36</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0hfnx20</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_057wy36</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:startEvent id="Event_0fssf8n">
@@ -24,10 +24,6 @@
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_10bwoy9</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:task id="Activity_06vb28h" name="Receive order">
-      <bpmn:incoming>Flow_10bwoy9</bpmn:incoming>
-      <bpmn:outgoing>Flow_0la84ld</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:intermediateThrowEvent id="Event_1lzzoqg">
       <bpmn:incoming>Flow_0la84ld</bpmn:incoming>
       <bpmn:linkEventDefinition id="LinkEventDefinition_0bu3bhv" name="shippingLink" />
@@ -36,10 +32,6 @@
       <bpmn:outgoing>Flow_09sbvjy</bpmn:outgoing>
       <bpmn:linkEventDefinition id="LinkEventDefinition_0450206" name="shippingLink" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:task id="Activity_057wy36" name="Ship the order">
-      <bpmn:incoming>Flow_09sbvjy</bpmn:incoming>
-      <bpmn:outgoing>Flow_1oz60up</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:endEvent id="Event_0hfnx20">
       <bpmn:incoming>Flow_1oz60up</bpmn:incoming>
     </bpmn:endEvent>
@@ -47,6 +39,14 @@
     <bpmn:sequenceFlow id="Flow_0la84ld" sourceRef="Activity_06vb28h" targetRef="Event_1lzzoqg" />
     <bpmn:sequenceFlow id="Flow_09sbvjy" sourceRef="Event_043i7uv" targetRef="Activity_057wy36" />
     <bpmn:sequenceFlow id="Flow_1oz60up" sourceRef="Activity_057wy36" targetRef="Event_0hfnx20" />
+    <bpmn:userTask id="Activity_06vb28h" name="Receive order">
+      <bpmn:incoming>Flow_10bwoy9</bpmn:incoming>
+      <bpmn:outgoing>Flow_0la84ld</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_057wy36" name="Ship the order">
+      <bpmn:incoming>Flow_09sbvjy</bpmn:incoming>
+      <bpmn:outgoing>Flow_1oz60up</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:textAnnotation id="TextAnnotation_0xd1jt3">
       <bpmn:text>This one throws event mapped to shippingLink link name</bpmn:text>
     </bpmn:textAnnotation>
@@ -81,22 +81,20 @@
       <bpmndi:BPMNShape id="Event_0fssf8n_di" bpmnElement="Event_0fssf8n">
         <dc:Bounds x="232" y="222" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_06vb28h_di" bpmnElement="Activity_06vb28h">
-        <dc:Bounds x="320" y="200" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1eq3nlv_di" bpmnElement="Event_1lzzoqg">
         <dc:Bounds x="472" y="222" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0ldj1t6_di" bpmnElement="Event_043i7uv">
         <dc:Bounds x="222" y="392" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_057wy36_di" bpmnElement="Activity_057wy36">
-        <dc:Bounds x="330" y="370" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0hfnx20_di" bpmnElement="Event_0hfnx20">
         <dc:Bounds x="482" y="392" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_04e31ja_di" bpmnElement="Activity_06vb28h">
+        <dc:Bounds x="320" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1q81zag_di" bpmnElement="Activity_057wy36">
+        <dc:Bounds x="330" y="370" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_1563h7w_di" bpmnElement="Association_1563h7w">
         <di:waypoint x="501" y="226" />
